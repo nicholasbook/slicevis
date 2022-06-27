@@ -1,3 +1,4 @@
 ctwidgets.egg-info/
 *.bak
 dist/
+ctwidgets/__pycache__
