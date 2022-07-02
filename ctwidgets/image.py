@@ -24,7 +24,7 @@ class Image:
     def get_zslice(self, z=0, t=0):
         return np.asarray(self.data[:, :, z, t])
 
-    def get_timepoint(self, t):
+    def get_timepoint(self, t=0):
         return np.asarray(self.data[:, :, :, t])
 
     def set_data(self, new_data):
