@@ -278,3 +278,11 @@ class SliceWidget:
 # slider for slice, button for animation, loadable segmentation overlay
 # https://plotly.com/python/figurewidget-app/
 # flip image?
+
+
+# class SegmentationWidget(SliceWidget):
+#     def __init__(self, image3D, segmentation, colored=False, debug=False):
+#         super().__init__(image3D, colored, debug)
+
+#         self.segmentation = segmentation
+#         self.widget.

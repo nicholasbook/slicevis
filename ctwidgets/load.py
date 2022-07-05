@@ -2,6 +2,7 @@ import nibabel
 import gffio
 import os
 from ctwidgets.image import Image
+import numpy as np
 
 __all__ = ["load_image"]
 
@@ -23,6 +24,13 @@ def load_image(filename):
                 image.metadata["Classes"][classes[i]] = int(class_indices[i])
     else:
         nbl = nibabel.load(filename)
-        image = nbl.get_fdata()
+        if nbl.ndim == 3:
+            tmp = nbl.get_fdata()
+            tmp = tmp[..., np.newaxis]
+            image = Image(tmp)
+        else:
+            image = Image(nbl.get_fdata())
+
+        # TODO: get metadata as dict (nbl.header.keys())
 
     return image
