@@ -29,15 +29,6 @@ class Image:
     def get_timepoint(self, t=0):
         return np.asarray(self.data[:, :, :, t])
 
-    def set_data(self, new_data):
-        self.data = new_data
-
-    def set_metadata(self, new_metadata):
-        self.metadata = new_metadata
-
-    def get_data(self):
-        return np.asarray(self.data)
-
     def get_class_names(self):
         if "isSegmentation" in self.metadata:
             return self.metadata["Classes"]
