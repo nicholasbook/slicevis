@@ -31,7 +31,7 @@ class SliceWidget:
     # TODO: clean up class members, docstring (raises, methods), ...
     # definitely needs some debug output
 
-    def __init__(self, image3D, debug=False):
+    def __init__(self, image3D, colored=False, debug=False):
         if image3D.ndim != 3:
             raise ValueError("input image must be 3D")
         global is_debug
@@ -125,6 +125,9 @@ class SliceWidget:
         self.slider.observe(self.__slice_changed, names="value")
         if is_debug:
             self.b_clear.on_click(self.__clear_output)
+
+        if colored:
+            self.set_colormap()
 
         display(self.app)  # show app
 
@@ -254,6 +257,20 @@ class SliceWidget:
         """Set width and height of image widget (includes colorbar)"""
         self.widget.layout.width = width
         self.widget.layout.height = height
+
+    def set_colormap(self, cmap="Inferno"):
+        """Changes the figure's colormap"""
+        self.widget.update_coloraxes(
+            cmin=np.min(self.image3D), cmax=np.max(self.image3D), colorscale=cmap
+        )
+
+    def add_class_names(self, names, indices):
+        """Sets indices as the colorbar ticks and names as the tick labels."""
+        self.widget.update_coloraxes(
+            colorbar_tickmode="array",
+            colorbar_tickvals=indices,
+            colorbar_ticktext=names,
+        )
 
 
 # interactive image should have:

@@ -9,10 +9,12 @@ __all__ = ["Image"]
 
 
 class Image:
-    def __init__(self, data=np.ndarray((1, 1, 1, 1)), metadata={}) -> None:
+    def __init__(self, data=np.ndarray((1, 1, 1, 1)), metadata=None) -> None:
         self.data = data
         if data.ndim != 4:
             raise ValueError("Only 4D images are supported.")
+        if metadata == None:
+            metadata = {}
         self.metadata = metadata
 
     def get_xslice(self, x=0, t=0):
@@ -36,5 +38,6 @@ class Image:
     def get_data(self):
         return np.asarray(self.data)
 
-    def get_metadata(self):
-        return self.metadata
+    def get_class_names(self):
+        if "isSegmentation" in self.metadata:
+            return self.metadata["Classes"]
