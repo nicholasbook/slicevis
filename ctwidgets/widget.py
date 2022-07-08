@@ -3,7 +3,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from ipywidgets import widgets
 import numpy as np
-from ctwidgets.throttle import throttle
+from ctwidgets.utilities import throttle
 
 is_debug = False  # global debug flag
 
@@ -29,7 +29,6 @@ class SliceWidget:
     """Class for widgets that offers interactive visualization of slices in 3D image"""
 
     # TODO: clean up class members, docstring (raises, methods), ...
-    # definitely needs some debug output
 
     def __init__(self, image3D, colored=False, debug=False):
         if image3D.ndim != 3:
@@ -51,7 +50,7 @@ class SliceWidget:
         )
 
         # utility buttons in second row
-        self.b_rot = widgets.Button(description="Rotate counterclockwise")
+        self.b_rot = widgets.Button(description="Rotate 90°")
         self.b_flip_ud = widgets.Button(description="Flip upside down")
         self.b_flip_lr = widgets.Button(description="Flip left to right")
         self.util_layout = widgets.HBox([self.b_rot, self.b_flip_ud, self.b_flip_lr])
@@ -59,7 +58,7 @@ class SliceWidget:
         # stack buttons
         self.b_layout_combined = widgets.VBox([self.b_layout, self.util_layout])
 
-        # vertical slider
+        # vertical slider (+ buttons and labels)
         max = self.image3D.shape[self.curr_axis] - 1
         self.slider = widgets.IntSlider(
             description="Z",
@@ -69,9 +68,18 @@ class SliceWidget:
             step=1,
             orientation="vertical",
         )
+        self.b_up = widgets.Button(
+            description="↑", layout=widgets.Layout(width="50px", font_weight="bold")
+        )
+        self.b_down = widgets.Button(
+            description="↓", layout=widgets.Layout(width="50px", font_weight="bold")
+        )
         self.min_label = widgets.Label(value="Min = 0")
         self.max_label = widgets.Label(value="Max = " + str(max))
-        self.slider_layout = widgets.VBox([self.max_label, self.slider, self.min_label])
+        self.slider_layout = widgets.VBox(
+            [self.max_label, self.b_up, self.slider, self.b_down, self.min_label],
+            layout=widgets.Layout(align_items="center"),
+        )
 
         # figure setup
         self.title = "Slice of 4D image"
@@ -123,6 +131,9 @@ class SliceWidget:
         self.b_flip_lr.on_click(self.__flip_lr)
 
         self.slider.observe(self.__slice_changed, names="value")
+        self.b_up.on_click(self.__up_pressed)
+        self.b_down.on_click(self.__down_pressed)
+
         if is_debug:
             self.b_clear.on_click(self.__clear_output)
 
@@ -136,8 +147,7 @@ class SliceWidget:
 
         self.curr_axis = 2  # z = const
         default_slice = int(self.image3D.shape[self.curr_axis] / 2)  # default z index
-        self.image2D = self.image3D[:, :, default_slice]
-        self.widget.data[0]["z"] = self.image2D
+        self.__update2D(default_slice)
         self.slider.value = default_slice
 
         xlabel = "Y"
@@ -159,8 +169,7 @@ class SliceWidget:
 
         self.curr_axis = 1  # y = const
         default_slice = int(self.image3D.shape[self.curr_axis] / 2)  # default y index
-        self.image2D = self.image3D[:, default_slice, :]
-        self.widget.data[0]["z"] = self.image2D
+        self.__update2D(default_slice)
         self.slider.value = default_slice
 
         xlabel = "Z"
@@ -181,8 +190,7 @@ class SliceWidget:
         self.curr_axis = 0  # x = const
         """Shows Y,Z-plane in widget"""
         default_slice = int(self.image3D.shape[self.curr_axis] / 2)  # default x index
-        self.image2D = self.image3D[default_slice, :, :]  # not transposed!
-        self.widget.data[0]["z"] = self.image2D
+        self.__update2D(default_slice)
         self.slider.value = default_slice
 
         xlabel = "Z"
@@ -200,10 +208,17 @@ class SliceWidget:
                 self.out.append_stdout("Show sagittal.")
 
     def __axis_changed(self, change):
-        """Update slider range based on current axis"""
+        """Update slider range and labels based on current axis"""
         max = self.image3D.shape[self.curr_axis] - 1
         self.slider.max = max
         self.max_label.value = "Max = " + str(max)
+
+        if self.curr_axis == 0:
+            self.slider.description = "X"
+        elif self.curr_axis == 1:
+            self.slider.description = "Y"
+        else:
+            self.slider.description = "Z"
 
         global is_debug
         if is_debug:
@@ -211,37 +226,31 @@ class SliceWidget:
                 print("Axis changed.")
 
     def __rotate_view(self, b):
-        self.image2D = np.rot90(self.image2D)
-        self.widget.data[0]["z"] = self.image2D
-        # TODO: store transformation matrix. currently, all 2D manipulations are lost on axis/slice change
+        rot_axes = []
+        if self.curr_axis == 0:
+            rot_axes = [1, 2]
+        elif self.curr_axis == 1:
+            rot_axes = [0, 2]
+        else:
+            rot_axes = [0, 1]
+        self.image3D = np.rot90(self.image3D, axes=rot_axes)  # rotated "view"
+
+        self.__update2D(self.slider.value)  # index unchanged
 
     def __flip_up(self, b):
-        self.image2D = np.flipud(self.image2D)
-        self.widget.data[0]["z"] = self.image2D
+        self.image3D = np.flipud(self.image3D)
+        self.__update2D(self.slider.value)
 
     def __flip_lr(self, b):
-        self.image2D = np.fliplr(self.image2D)
-        self.widget.data[0]["z"] = self.image2D
+        self.image3D = np.fliplr(self.image3D)
+        self.__update2D(self.slider.value)
 
     @throttle(0.1, is_debug)
     def __slice_changed(self, change):
         """Update self.image2D if slider changed (throttled)"""
         # careful, this callback is also triggered by slider.value = ... !
         # therefore, make sure that change.new does not exceed dimension limits
-
-        if self.curr_axis == 0:
-            # index = max(change.new, self.image3D.shape[0] - 1)
-            index = change.new
-            self.image2D = self.image3D[index, :, :]
-            self.widget.data[0]["z"] = self.image2D
-        elif self.curr_axis == 1:
-            index = change.new  # max(change.new, self.image3D.shape[1] - 1)
-            self.image2D = self.image3D[:, index, :]
-            self.widget.data[0]["z"] = self.image2D
-        else:
-            index = change.new  # max(change.new, self.image3D.shape[2] - 1)
-            self.image2D = self.image3D[:, :, index]
-            self.widget.data[0]["z"] = self.image2D
+        self.__update2D(change.new)
 
         global is_debug
         if is_debug:
@@ -250,6 +259,30 @@ class SliceWidget:
 
     def __clear_output(self, b):
         self.out.clear_output()
+
+    def __update2D(self, index):
+        if self.curr_axis == 0:
+            # index = max(change.new, self.image3D.shape[0] - 1)
+            self.image2D = self.image3D[index, :, :]
+            self.widget.data[0]["z"] = self.image2D
+        elif self.curr_axis == 1:
+            # max(change.new, self.image3D.shape[1] - 1)
+            self.image2D = self.image3D[:, index, :]
+            self.widget.data[0]["z"] = self.image2D
+        else:
+            # max(change.new, self.image3D.shape[2] - 1)
+            self.image2D = self.image3D[:, :, index]
+            self.widget.data[0]["z"] = self.image2D
+
+    def __up_pressed(self, b):
+        new_value = self.slider.value + 1
+        self.slider.value = new_value
+        self.__update2D(new_value)
+
+    def __down_pressed(self, b):
+        new_value = self.slider.value - 1
+        self.slider.value = new_value
+        self.__update2D(new_value)
 
     # --- public methods ---
 
