@@ -18,7 +18,7 @@ class Timer:
         self._task.cancel()
 
 
-def throttle(wait, debug=False):
+def throttle(wait):
     """Decorator that prevents a function from being called
     more than once every wait period."""
 
@@ -44,9 +44,6 @@ def throttle(wait, debug=False):
                 timer = Timer(new_wait, call_it)
                 timer.start()
 
-        if not debug:
-            return throttled
-        else:
-            return fn
+        return throttled
 
     return decorator

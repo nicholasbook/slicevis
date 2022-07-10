@@ -2,3 +2,7 @@ ctwidgets.egg-info/
 *.bak
 dist/
 ctwidgets/__pycache__
+examples/s.segff
+examples/s2.segff
+examples/p.nii.gz
+examples/l.nii.gz

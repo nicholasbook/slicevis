@@ -32,3 +32,7 @@ class Image:
     def get_class_names(self):
         if "isSegmentation" in self.metadata:
             return self.metadata["Classes"]
+
+    def get_class_colors(self):
+        if "isSegmentation" in self.metadata:
+            return self.metadata["ClassColors"]
