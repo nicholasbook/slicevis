@@ -3,9 +3,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 from ipywidgets import widgets
 import numpy as np
-from ctwidgets.image import Image
-from ctwidgets.utilities import throttle
-from ctwidgets.load import load_image
+from slicevis.image import Image
+from slicevis.utilities import throttle
+from slicevis.load import load_image
 
 is_debug = False  # global debug flag
 

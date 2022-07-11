@@ -1,7 +1,7 @@
 import nibabel
 import gffio
 import os
-from ctwidgets.image import Image
+from slicevis.image import Image
 import numpy as np
 import plotly.colors as pc
 
