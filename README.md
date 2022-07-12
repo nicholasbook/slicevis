@@ -1,6 +1,11 @@
 ## slicevis
----
-A Python package for interactive slice visualization of 3D datasets in Jupyter notebooks.
+A Python package for interactive slice and segmentation visualization of 3D datasets in Jupyter notebooks.
+
+
+<figure>
+    <img src="slicevis_axial.png" width="800" height="600" alt="Axial slice visualization.">
+    <figcaption>Axial slice with multi-class segmentation in *slicevis*</figcaption>
+</figure>
 
 # Installation (Windows)
 1. Clone this repository `git clone https://git.rwth-aachen.de/nicholasbook/sce-project-ss22.git`.
@@ -20,3 +25,6 @@ Minimal usage:
 The *slicevis* package is licensed under the term of the MIT license.
 
 The examples directory of this repository contain data that is licensed under CC-BY-SA 4.0. Please refer to `examples/LICENSE.txt` for more details.
+
+# Acknowledgements
+The *slicevis* Python package was developed by me, Nicholas Book, as a final project for the course "Sustainable Computational Engineering" held by [Dr. Anil Yildiz](https://www.mbd.rwth-aachen.de/cms/mbd/Der-Lehrstuhl/Team/~qqcsz/Anil-Yildiz/) and [Dr. Hu Zhao](https://www.mbd.rwth-aachen.de/cms/mbd/Der-Lehrstuhl/Team/~qneki/Hu-Zhao/) of the [Chair of Methods for Model-based Development in Computational Engineering (MBD)](https://www.mbd.rwth-aachen.de/cms/~qamyz/mbd/). I would like to extend my gratitude to both for their kind support. 
