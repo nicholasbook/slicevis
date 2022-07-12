@@ -288,7 +288,7 @@ class SliceWidget:
             self.seg3D = np.flip(self.seg3D, axis=flip_axis)
         self.__update2D(None)
 
-    @throttle(0.05)
+    # @throttle(0.05)
     def __slice_changed(self, change):
         """Update self.image2D if slider changed (throttled)"""
         # careful, this callback is also triggered by slider.value = ... !

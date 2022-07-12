@@ -6,7 +6,7 @@ Please refer to and cite it as:
 
 "lung.nii.gz" and "lung_label.nii.gz" are part of the Decathlon Medical Segmentation (2018) dataset.
 Both images are licensed under CC-BY-SA 4.0. 
-For the full license agreement, please refer to the license file at https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2 
+For the full license agreement, please refer to license.txt at https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2 
 
 "lung_prediction.nii.gz" was created using nnU-Net. 
 The machine learning algorithm is published as:
