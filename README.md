@@ -1,25 +1,25 @@
 ## slicevis
 A Python package for interactive slice and segmentation visualization of 3D datasets in Jupyter notebooks.
 
-
-<figure>
-    <img src="slicevis_axial.png" width="800" height="600" alt="Axial slice visualization.">
-    <figcaption>Axial slice with multi-class segmentation in *slicevis*</figcaption>
-</figure>
+<img src="slicevis_axial.png" width="800" height="600" alt="Axial slice visualization.">    
+*Axial slice of murine CT scan with multi-class segmentation in *slicevis*. *
 
 # Installation (Windows)
 1. Clone this repository `git clone https://git.rwth-aachen.de/nicholasbook/sce-project-ss22.git`.
 2. (Optional) Create a virtual environment `py -m venv env` and activate it `call env/Scripts/activate.bat`.
-3. Install locally using `pip install -e .`
+3. Install locally using `pip install -e .`.
 
 # Usage
 *slicevis* is meant to be used in combination with Jupyter notebooks. I recommend you use VSCode with the Python and Jupyter extension installed.
 Check out the `examples` directory for test data and prepared notebooks.
 
 Minimal usage:
-`from slicevis import SliceWidget`
-`data = slicevis.load_image("CT280.gff")`
-`widget = slicevis.SliceWidget(data.get_timepoint())` 
+
+```
+from slicevis import SliceWidget
+data = slicevis.load_image("CT280.gff")
+widget = slicevis.SliceWidget(data.get_timepoint())
+```
 
 # License
 The *slicevis* package is licensed under the term of the MIT license.
