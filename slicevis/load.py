@@ -27,12 +27,10 @@ def load_image(filename, is_segmentation=False):
                 image.metadata["Classes"][classes[i]] = int(class_indices[i])
                 image.metadata["ClassColors"][classes[i]] = str(class_colors[i])
             tmp = {}
-            for i in image.metadata["ClassColors"].keys():  # convert to rgb(a,b,c)
-                tmp[i] = (
-                    "rgb("
-                    + ",".join(image.metadata["ClassColors"][i].split(" ")[0:3])
-                    + ")"
-                )
+            for i in image.metadata["ClassColors"].keys():  # convert bgra to rgb
+                bgra_list = image.metadata["ClassColors"][i].split(" ")
+                rgb = ",".join([bgra_list[2], bgra_list[1], bgra_list[0]])
+                tmp[i] = "rgb(" + rgb + ")"
             image.metadata["ClassColors"] = tmp
     else:
         nbl = nibabel.load(filename)

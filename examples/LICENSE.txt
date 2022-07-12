@@ -1,0 +1,16 @@
+"CT280.gff" and "CT280_organs.gff" are part of a published dataset by Rosenhain et al. 
+Please refer to and cite it as:
+	Rosenhain, Stefanie; Magnuska, Zuzanna A.; Yamoah, Grace G.; Rawashdeh, Wa’el Al; Kiessling, Fabian; Gremse, Felix (2018):
+	A preclinical micro-computed tomography database including 3D whole body organ segmentations. 
+	figshare. Collection. https://doi.org/10.6084/m9.figshare.c.4224377.v1 
+
+"lung.nii.gz" and "lung_label.nii.gz" are part of the Decathlon Medical Segmentation (2018) dataset.
+Both images are licensed under CC-BY-SA 4.0. 
+For the full license agreement, please refer to the license file at https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2 
+
+"lung_prediction.nii.gz" was created using nnU-Net. 
+The machine learning algorithm is published as:
+Isensee, F., Jaeger, P. F., Kohl, S. A., Petersen, J., & Maier-Hein, K. H. (2020). nnU-Net: a self-configuring method 
+for deep learning-based biomedical image segmentation. Nature Methods, 1-9.
+
+All Jupyter notebooks (*.ipynb) are licensed under CC-BY-SA 4.0. Please refer to https://creativecommons.org/licenses/by-sa/4.0/legalcode for the full license agreement.
