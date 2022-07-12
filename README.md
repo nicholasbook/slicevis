@@ -1,7 +1,8 @@
 ## slicevis
 A Python package for interactive slice and segmentation visualization of 3D datasets in Jupyter notebooks.
 
-<img src="slicevis_axial.png" width="800" height="600" alt="Axial slice visualization.">    
+<img src="slicevis_axial.png" width="800" height="600" alt="Axial slice visualization."> 
+   
 *Axial slice of murine CT scan with multi-class segmentation in *slicevis*. *
 
 # Installation (Windows)
