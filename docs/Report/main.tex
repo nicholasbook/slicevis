@@ -1,0 +1,39 @@
+\documentclass[12pt,a4paper,titlepage]{report}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+%\usepackage[backend=biber, sorting=none, url=true, style=numeric]{biblatex}
+%\addbibresource{./references.bib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalize, noabbrev]{cleveref}
+
+\usepackage{tocloft}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\huge\bfseries}{\thechapter .}{20pt}{\huge}
+\titlespacing{\chapter}{0pt}{0pt}{1cm}
+
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+
+\frenchspacing
+\emergencystretch=1em
+
+% Title Page
+\title{\emph{slicevis} Python Package \\ \vspace{1cm} {Final Project for \emph{Sustainable Computational Engineering} \\ RWTH Aachen University}}
+\author{Nicholas Book \\ \href{mailto:nicholas.book@rwth-aachen.de}{nicholas.book@rwth-aachen.de}}
+\date{14.07.2022}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\include{intro.tex}
+\include{structure.tex}
+\include{use_cases.tex}
+\include{conclusion.tex}
+
+\end{document}          
