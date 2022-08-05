@@ -349,9 +349,10 @@ class SliceWidget:
         Args:
             index (int): the new slice index
         """
-        if index is None:
+        if index is None:  # index unchanged
             index = self.slider.value
 
+        # update image2D and segmentations according to axis and index
         if self.curr_axis == 0:
             self.image2D = self.image3D[index, :, :]
             if self.seg3D is not None:
@@ -374,8 +375,7 @@ class SliceWidget:
         # generate segmentations (optional)
         trace_list = []
 
-        # validation segmentation first
-        if self.seg3D_validation is not None:
+        if self.seg3D_validation is not None:  # validation segmentation first
             for c in self.class_names_validation.values():
                 if c == 0:  # unclassified
                     continue
