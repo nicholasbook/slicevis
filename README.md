@@ -23,9 +23,9 @@ widget = slicevis.SliceWidget(data.get_timepoint())
 ```
 
 # License
-The *slicevis* package is licensed under the terms of the MIT license.
+The *slicevis* package is licensed under the terms of the **MIT** license.
 
-The examples directory of this repository contain data that is licensed under CC-BY-SA 4.0. Please refer to `examples/LICENSE.txt` for more details.
+The examples directory of this repository contain data that is licensed under **CC-BY-SA 4.0**. Please refer to `examples/LICENSE.txt` for more details.
 
 # Acknowledgements
-The *slicevis* Python package was developed by me, Nicholas Book, as a final project for the course "Sustainable Computational Engineering" held by [Dr. Anil Yildiz](https://www.mbd.rwth-aachen.de/cms/mbd/Der-Lehrstuhl/Team/~qqcsz/Anil-Yildiz/) and [Dr. Hu Zhao](https://www.mbd.rwth-aachen.de/cms/mbd/Der-Lehrstuhl/Team/~qneki/Hu-Zhao/) of the [Chair of Methods for Model-based Development in Computational Engineering (MBD)](https://www.mbd.rwth-aachen.de/cms/~qamyz/mbd/). I would like to extend my gratitude to both for their kind support. 
+The *slicevis* Python package was developed by me, Nicholas Book, as a final project for the course "Sustainable Computational Engineering", held by [Dr. Anil Yildiz](https://www.mbd.rwth-aachen.de/cms/mbd/Der-Lehrstuhl/Team/~qqcsz/Anil-Yildiz/) and [Dr. Hu Zhao](https://www.mbd.rwth-aachen.de/cms/mbd/Der-Lehrstuhl/Team/~qneki/Hu-Zhao/) of the [Chair of Methods for Model-based Development in Computational Engineering (MBD)](https://www.mbd.rwth-aachen.de/cms/~qamyz/mbd/). I would like to extend my gratitude to both for their kind support. 

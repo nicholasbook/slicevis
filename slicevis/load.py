@@ -9,16 +9,27 @@ __all__ = ["load_image"]
 
 
 def load_image(filename, is_segmentation=False):
+    """Loads a four-dimensional image of variable file type.
+
+    Args:
+        filename (str): the filename
+        is_segmentation (bool, optional): flag for segmentation files. Defaults to False.
+
+    Returns:
+        Image: the 4D image as an instance of the Image class (defined in image.py)
+    """
     _, ext = os.path.splitext(filename)
     image = Image()
 
+    # load GFF files using gffio
     if (ext == ".gff") or (ext == ".segff"):
         gff = gffio.load(filename)
-        image = Image(gff[:, :, :, :, 0])  # ignore channels for now
+        image = Image(gff[:, :, :, :, 0])  # ignore channels
         if ext == ".segff":  # GFF segmentation file
-            classes = gff.info.meta[0][1]["ClassNames"].split("|")  # very unsafe
-            class_indices = gff.info.meta[0][1]["ClassIndices"].split("|")
-            class_colors = gff.info.meta[0][1]["ClassColors"].split("|")
+            # get class names and colors from metadata
+            classes = gff.info.meta["Project info"]["ClassNames"].split("|")
+            class_indices = gff.info.meta["Project info"]["ClassIndices"].split("|")
+            class_colors = gff.info.meta["Project info"]["ClassColors"].split("|")
             num_classes = len(classes)
             image.metadata["isSegmentation"] = True
             image.metadata["Classes"] = {}
@@ -32,7 +43,7 @@ def load_image(filename, is_segmentation=False):
                 rgb = ",".join([bgra_list[2], bgra_list[1], bgra_list[0]])
                 tmp[i] = "rgb(" + rgb + ")"
             image.metadata["ClassColors"] = tmp
-    else:
+    else:  # use nibabel
         nbl = nibabel.load(filename)
         if nbl.ndim == 3:
             tmp = nbl.get_fdata()
