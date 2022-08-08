@@ -1,25 +1,10 @@
 \chapter{Package Structure}
-This chapter details the structure of the \emph{slicevis} package repository. The repository is hosted on GitLab [link] and it is publicly available. 
+This chapter details the structure of the \emph{slicevis} package repository. 
 
-Python package + examples (+ demo notebook).
+The repository is hosted on GitLab [REF] and it is publicly available. Besides the Python source code, which is located in the \emph{slicevis} sub-directory, the repository also contains a README, a license file (LICENSE), pip build instructions, an examples directory, and documentation. The README is formatted using Markdown and it serves as a short description and usage guide for the package. \emph{Slicevis} is licensed under the MIT License [REF], which permits free use, modification, and redistribution as long as credit is given. 
 
-Contains all files and build instructions (pip only). README and license.
+The build instructions are specified in the files pyproject.toml, setup.cfg, and setup.py according to the Python Package Index guide [REF]. In pyproject.toml the build tool is configured to setuptools. All necessary package metadata and dependencies are specified in setup.cfg. Notably, the gffio package is installed from TestPyPi as it is only available there. Further dependencies are numpy, nibabel, matplotlib, plotly, ipywidgets, nbformat, wheel, and pandas. The setup.py file is included for backwards-compatibility reasons, as described here [REF].
 
-\section{Python Implementation}
+The documentation directory includes the final presentation as a PDF and all \LaTeX files for this report.
 
-Modules: load, image, widget, utilities
-
-Classes: Image, SliceWidget
-
-Dependecies: numpy, jupyter, ipywidgets, plotly
-
-Explain how control widgets are connected to callbacks.
-
-Support of many file formats. GFF is treated specially because of richer metadata.
-
-Diagram that explains image3D (the whole image, possibly rotated), image2D (current slice), segmentation3D/2D, the update process, ...
-
-Performance issues.
-
-\section{Examples}
-Briefly mention the example datasets and notebooks. Separate license too.
+The examples directory contains several datasets and a Jupyter notebook that demonstrates how to use the package. For the datasets I chose a CT scan of a mouse, including a multi-organ segmentation, a CT scan of a human upper body with labeled lung tumors, and a prediction of a neural network for the same lung scan. More details are given in the following chapter titled Use-Cases. A special license file is also included which details the origins and copyright notices for all examples.

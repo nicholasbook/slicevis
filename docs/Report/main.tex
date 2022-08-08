@@ -1,7 +1,7 @@
 \documentclass[12pt,titlepage]{report}
 \usepackage[a4paper, left = 2.5cm, right = 2.5cm, top = 1.5cm, bottom = 1.5cm, includeheadfoot]{geometry}
 \usepackage[utf8]{inputenc}
-
+\usepackage{graphicx}
 \usepackage[english]{babel}
 %\usepackage[backend=biber, sorting=none, url=true, style=numeric]{biblatex}
 %\addbibresource{./references.bib}
@@ -20,6 +20,9 @@
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{1.5}
 
+\usepackage{caption}
+\usepackage{subcaption}
+
 \frenchspacing
 \emergencystretch=1em
 
@@ -37,6 +40,5 @@
 \include{structure.tex}
 \include{implementation.tex}
 \include{use_cases.tex}
-\include{conclusion.tex}
 
 \end{document}          
