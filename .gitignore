@@ -12,3 +12,4 @@ env
 *.run.xml
 *.toc
 *.synctex.gz
+.vscode/

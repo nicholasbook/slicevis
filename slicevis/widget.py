@@ -520,7 +520,6 @@ class SliceWidget:
 
     def _compute_dice_score(self):
         """Computes the Sorensen-Dice similarity coefficient between the segmentation and validation segmentation."""
-        print("Computing Dice scores...\n")  # might take a second or two
 
         if self.seg3D is not None and self.seg3D_validation is not None:
             for i in self.class_names:
@@ -528,9 +527,9 @@ class SliceWidget:
                 if index == 0:  # unclassified
                     continue
                 X_i = self.seg3D[self.seg3D == index]
-                X = np.sum(X_i)  # number of voxels in class i
+                X = len(X_i)  # number of voxels in class i
                 Y_i = self.seg3D_validation[self.seg3D_validation == index]
-                Y = np.sum(Y_i)
+                Y = len(Y_i)
 
                 # intersection of segmentation and validation for class i
                 intersection = np.sum(
