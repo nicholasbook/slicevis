@@ -1,10 +1,14 @@
 \chapter{Package Structure}
 This chapter details the structure of the \emph{slicevis} package repository which is publicly available on GitLab \cite{repo}.
 
-The repository is hosted on GitLab [REF] and it is publicly available. Besides the Python source code, which is located in the \emph{slicevis} sub-directory, the repository also contains a README, a license file (LICENSE), pip build instructions, an examples directory, and documentation. The README is formatted using Markdown and it serves as a short description and usage guide for the package. \emph{Slicevis} is licensed under the MIT License [REF], which permits free use, modification, and redistribution as long as credit is given. 
+Besides the Python source code for the package, located in the \emph{slicevis} sub-directory, the repository contains a \texttt{README}, a license file (\texttt{LICENSE}), and build instructions for pip. Additionally, there is an directory for examples and one for documentation. 
 
-The build instructions are specified in the files pyproject.toml, setup.cfg, and setup.py according to the Python Package Index guide [REF]. In pyproject.toml the build tool is configured to setuptools. All necessary package metadata and dependencies are specified in setup.cfg. Notably, the gffio package is installed from TestPyPi as it is only available there. Further dependencies are numpy, nibabel, matplotlib, plotly, ipywidgets, nbformat, wheel, and pandas. The setup.py file is included for backwards-compatibility reasons, as described here [REF].
+The README is formatted using Markdown and it serves as a short description and usage guide for the package. 
 
-The documentation directory includes the final presentation as a PDF and all \LaTeX files for this report.
+\emph{Slicevis} is licensed under the MIT License, which permits free use, modification, and redistribution as long as credit is given \cite{mit}. 
+
+The build instructions are specified in the files \texttt{pyproject.toml},\texttt{ setup.cfg}, and \texttt{setup.py} according to the Python Packaging User Guide \cite{pypa}. In \texttt{pyproject.toml}, the build tool is configured to Setuptools. All necessary package metadata and dependencies are specified in \texttt{setup.cfg}. The dependencies are numpy, gffio, nibabel, matplotlib, plotly, ipywidgets, nbformat, wheel, and pandas. A \texttt{setup.py} file is included for backwards-compatibility reasons, as described here \cite{legacy_config}.
+
+The documentation directory includes the final presentation and this report as a PDF plus all required \LaTeX files to make further changes to the report.
 
 The examples directory contains several datasets and a Jupyter notebook that demonstrates how to use the package. For the datasets I chose a CT scan of a mouse, including a multi-organ segmentation, a CT scan of a human upper body with labeled lung tumors, and a prediction of a neural network for the same lung scan. More details are given in the following chapter titled Use-Cases. A special license file is also included which details the origins and copyright notices for all examples.

@@ -1,9 +1,9 @@
 \chapter{Implementation}
-This chapter deals with the implementation details of the \emph{slicevis} Python package.
+This chapter deals with the details of the \emph{slicevis} package implementation. First, a brief overview of the user interface is given and then the internal methods and logic is laid out.
 
-The interactive GUI relies on several other packages, namely jupyter, ipywidgets, and plotly.  
+To build the interactive GUI, \emph{slicevis} relies on several other packages, namely jupyter, ipywidgets, and plotly .  
 
-The widget.py modules defines the SliceWidget class which creates the GUI and handles all user interaction. A three-dimensional Numpy Ndarray is passed to the class instance constructor. There is also an optional debug mode which enables an Output widget [] and layout borders for developers. The init method adds all buttons, creates layouts, and connects function callbacks. Each widget has at least one callback associated to it.
+The \texttt{widget.py} modules defines the \texttt{SliceWidget} class which constructs the GUI and handles all user interaction. A three-dimensional NumPy \texttt{ndarray} is passed to the class instance constructor \cite{ndarray}. There is also an optional debug mode which enables an Output widget  and layout borders for developers. The init method adds all buttons, creates layouts, and connects function callbacks. Each widget has at least one callback associated to it.
 
 \begin{figure}[h]
 	\centering

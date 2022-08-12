@@ -1,5 +1,5 @@
 import nibabel
-import gffio
+import pygff
 import os
 from slicevis.image import Image
 import numpy as np
@@ -23,7 +23,7 @@ def load_image(filename, is_segmentation=False):
 
     # load GFF files using gffio
     if (ext == ".gff") or (ext == ".segff"):
-        gff = gffio.load(filename)
+        gff = pygff.load(filename)
         image = Image(gff[:, :, :, :, 0])  # ignore channels
         if ext == ".segff":  # GFF segmentation file
             # get class names and colors from metadata
