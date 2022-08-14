@@ -10,6 +10,7 @@
 \usepackage{csquotes}
 
 \usepackage{tocloft}
+\tocloftpagestyle{empty}
 
 \usepackage{titlesec}
 \titleformat{\chapter}{\normalfont\huge\bfseries}{\thechapter .}{20pt}{\huge}
@@ -23,11 +24,13 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+\usepackage[capitalize, noabbrev]{cleveref}
+
 \frenchspacing
 \emergencystretch=1em
 
 % Title Page
-\title{\emph{slicevis} Python Package \\ \vspace{1cm} {Final Project for \emph{Sustainable Computational Engineering} \\ RWTH Aachen University}}
+\title{\emph{slicevis} Python Package \\ \vspace{1cm} {Final Project for\\ \emph{Sustainable Computational Engineering} \\ RWTH Aachen University}}
 \author{Nicholas Book \\ \href{mailto:nicholas.book@rwth-aachen.de}{nicholas.book@rwth-aachen.de}}
 \date{14.08.2022}
 
@@ -35,7 +38,8 @@
 
 \maketitle
 \tableofcontents
-
+\clearpage
+\setcounter{page}{1}
 \include{intro.tex}
 \include{structure.tex}
 \include{implementation.tex}
